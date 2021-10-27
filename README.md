@@ -1,13 +1,13 @@
 # Image-Comparision
+
 Comparison of similar looking images
 
-create list of images to compare
+create list of images to compare using absolute difference and thresholding and optionally
+with histogram matching
 
 ```
-python3 generate_lst.py -t /home/ram/Downloads/ml-challenge.tar -i /home/ram/image_comp_inp -o /home/ram
+python3 main.py -t tar file path -i path to input images -o output path 
 ```
-To compare images
 
-```
-python3 compare.py 
-```
+
+
