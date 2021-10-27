@@ -22,8 +22,9 @@ class Comparison(object):
         self.bit_depth = bit_depth
         self.min_contour_area = min_contour_area
 
-    def get_datapoint_list(inp):
+    def get_datapoint_list(self,inp_list):
         """
+        if lst file is given /dont have to use generate_list.py
         generates a list of paths
         :param inp: csv file where column path is used OR a list of paths
         :return: list of paths
