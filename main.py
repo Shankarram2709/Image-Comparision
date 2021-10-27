@@ -30,6 +30,7 @@ if __name__ == '__main__':
     gaussian_blur_radius_list = args.gaussian_kernel 
     dp_list = generate_list.image_gen(filepath, inpath, outpath)  
     img_comparison = Comparison(hist_match, bit_depth= 12, min_contour_area= 100)
+    #dp_list = img_comparison.get_datapoint_list("path to input lst")
     n = 2
     removed_img_lst = []
     dp_list = dp_list[0:10]
