@@ -33,23 +33,24 @@ if __name__ == '__main__':
     #dp_list = img_comparison.get_datapoint_list("path to input lst")
     n = 2
     removed_img_lst = []
-    dp_list = dp_list[0:10]
-    for count, (img1,img2) in enumerate(combinations(dp_list,n)):
-        image_1 = cv2.imread(img1)
-        image_2 = cv2.imread(img2)
-        image1_pre = img_comparison.preprocess_image_change_detection(image_1,gaussian_blur_radius_list)
-        image2_pre = img_comparison.preprocess_image_change_detection(image_2,gaussian_blur_radius_list)
-        image_1,image_2 = img_comparison.standardization(image1_pre,image2_pre)
+    loaded_img_list = []
+    for i in dp_list:
+        load_img = cv2.imread(i)
+        load_img = img_comparison.preprocess_image_change_detection(load_img,gaussian_blur_radius_list)
+        load_img = img_comparison.standardization(load_img)
+        loaded_img_list.append(load_img)
+    #from IPython import embed;embed()
+    for count, (img1,img2) in enumerate(combinations(loaded_img_list,n)):
         if hist_match:
-            matched = img_comparison.histogram_matching(image1_pre,image2_pre)
-            score1,thresh1 = img_comparison.compare_frames_change_detection(image1_pre, matched, 100)
-            score2,thresh2 = img_comparison.compare_frames_change_detection(image2_pre, matched, 100)
+            matched = img_comparison.histogram_matching(img1,img2)
+            score1,thresh1 = img_comparison.compare_frames_change_detection(img1, matched, 100)
+            score2,thresh2 = img_comparison.compare_frames_change_detection(img2, matched, 100)
             if score1 < score2:
                 score = score1
             else:
                 score = score2
         else:
-            score,thresh = img_comparison.compare_frames_change_detection(image1_pre, image2_pre, 100)
+            score,thresh = img_comparison.compare_frames_change_detection(img1, img2, 100)
 
         if score <= 1000:
             if img2 not in removed_img_lst:

@@ -98,11 +98,11 @@ class Comparison(object):
 
         return score, thresh
 
-    def standardization(self, img1, img2, bit_depth=12):
-        img1 = img1 / float((2**bit_depth)-1)
-        img2 = img2 / float((2**bit_depth)-1)
+    def standardization(self, img, bit_depth=12):
+        img = img / float((2**bit_depth)-1)
+        #img2 = img2 / float((2**bit_depth)-1)
 
-        return img1, img2
+        return img
 
     def histogram_matching(self, img1_pre, img2_pre):
         """
